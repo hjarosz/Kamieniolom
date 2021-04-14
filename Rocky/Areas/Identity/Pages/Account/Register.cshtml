@@ -1,0 +1,60 @@
+﻿@page
+@model RegisterModel
+
+@if (User.IsInRole(Rocky.WC.AdminRole))
+{
+    <h1>Rejestracja administratora</h1>
+}
+else
+{
+    <h1>Rejestracja</h1>
+
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h4>Stwórz nowe konto.</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.FullName">Imię i Nazwisko</label>
+                <input asp-for="Input.FullName" class="form-control" />
+                <span asp-validation-for="Input.FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PhoneNumber">Telefon</label>
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Password">Hasło</label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.ConfirmPassword">Potwierdź hasło</label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            @if (User.IsInRole(Rocky.WC.AdminRole))
+            {
+                <button type="submit" class="btn btn-warning">Zarejestruj administratora</button>
+            }
+            else
+            {
+        <button type="submit" class="btn btn-primary">Zarejestruj</button>
+
+            }
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
